@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CODEGYM-MOVIE- Hệ thống Rạp chiếu phim giá rẻ, hiện đại bậc nhất</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/main-style.css}"/>
+</head>
+<body>
+<nav th:replace="/layout::navbar"></nav>
+<h3 th:if="${#message != null}" th:text="${message}" style="color: red;"></h3>
+<!--login-register-->
+<div class="register-content">
+    <div class="register-wrap">
+        <ul th:if="${#request.userPrincipal==null}">
+            <li class="btn-register">
+                <a href="/registration">Đăng Kí Thành Viên</a>
+            <li class="btn-login">
+                <a href="/login">Đăng Nhập</a>
+            </li>
+        </ul>
+        <ul th:if="${#request.userPrincipal != null}">
+            <li class="btn-register">
+                <a href="">Thông Tin Thành Viên</a>
+            <li class="btn-login">
+                <a th:href="@{/logout}">Đăng Xuất</a>
+            </li>
+            <li>
+                <p>Xin Chào! <span th:text="${#request.userPrincipal.name}"></span></p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--carousel-->
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="/images/carousel-1.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <!--                <h5>First slide label</h5>-->
+                <!--                <p>Some representative placeholder content for the first slide.</p>-->
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="/images/carousel-2.png" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <!--                <h5>Second slide label</h5>-->
+                <!--                <p>Some representative placeholder content for the second slide.</p>-->
+            </div>
+        </div>
+        <!--        <div class="carousel-item">-->
+        <!--            <img src="..." class="d-block w-100" alt="...">-->
+        <!--            <div class="carousel-caption d-none d-md-block">-->
+        <!--                <h5>Third slide label</h5>-->
+        <!--                <p>Some representative placeholder content for the third slide.</p>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<div class="cart-content">
+    <div class="cart-wrap row">
+        <div class="block-title col-5">
+            <a href=""><h2>Mua Vé ONLINE</h2></a>
+        </div>
+        <div class="col-5">
+            <a href="" class="hotline">0988.88.5678</a>
+        </div>
+    </div>
+</div>
+<!--address cinema-->
+<div class="cinema-list-content">
+    <div class="cinema-list-wrap">
+
+        <div class="cinema-list">
+            <h2>Hệ thống rạp</h2>
+            <div class="select-list">
+                <div class="select-header">
+                    <h2>Đà Nẵng</h2>
+                </div>
+            </div>
+        </div>
+        <div class="cinema-address">
+            <h2><span class="c_logo"
+                      style="background-image:url(https://cinestar.com.vn/pictures/moi/9Logo/white-2018.png);"></span>
+                <span class="c_name">Hải Châu</span></h2>
+            <div class="c_address">280 Nguyễn Tất Thành,Phường Thanh Bình , Quận Hải Châu, Thành Phố Đà Nẵng</div>
+            <div class="c_tel">Đặt vé: <strong><a href="tel:0988885678">0988 88 5678</a></strong></div>
+        </div>
+
+    </div>
+</div>
+<!--list film-->
+<div class="schedule-list-content">
+    <div class="schedule-list-wrap">
+        <div class="schedule-load" style="min-height: 547px; opacity: 1;">
+            <div class="schedule-item" cine-id="7acc54e8-2228-4495-8077-f0970a0f286f"
+                 cine-name="RESIDENT EVIL: ĐẢO TỬ THẦN">
+                <div class="film-item cl-org t-2d">
+                    <a href="#">
+                        <div class="film-item-txt">
+                            <h3>RESIDENT EVIL: ĐẢO TỬ THẦN</h3>
+                            <p>Đặc vụ D.S.O. Leon S. Kennedy đang thực hiện nhiệm vụ giải cứu Tiến sĩ Antonio Taylor
+                                khỏi những kẻ bắt cóc, thì bất ngờ bị một phụ nữ bí ẩn ngăn cản. Trong lúc đó, đặc
+                                vụ
+                                B.S.A.A. Chris Redfield đang điều tra một đại dịch xác sống ở San Francisco mà chưa
+                                xác
+                                định được nguyên nhân lây nhiễm. Điểm chung duy nhất của các nạn nhân là tất cả đều
+                                ghé
+                                thăm đảo Alcatraz không lâu trước đó. Lần theo manh mối này, Chris và đồng đội tìm
+                                đến
+                                hòn đảo, nơi một cơn kinh hoàng khác đang chờ đón họ.
+
+                                T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 18 TUỔI TRỞ LÊN (18+)</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="56f07c41-61ba-4dd6-8065-7ce5442910b3"
+                 cine-name="BỖNG DƯNG ĐƯỢC YÊU (T16)">
+                <div class="film-item cl-ppl-dark t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/07-2023/bong-dung-duoc-yeu.jpg"
+                                 alt="BỖNG DƯNG ĐƯỢC YÊU (T16)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>BỖNG DƯNG ĐƯỢC YÊU (T16)</h3>
+                            <p>ChangSoo một người đàn ông có vẻ ngoài giản dị, cuộc sống luôn đối xử tệ với anh, anh
+                                chưa bao giờ thực sự trải nghiệm một mối tình lãng mạn viên mãn. Mọi thứ thay đổi
+                                khi
+                                anh xịt một loại nước hoa bí ẩn do một người lạ mang đến cho. Đột nhiên, các cô gái
+                                không thể cưỡng lại sự quyến rũ và xô đến anh. Vô tình gặp gỡ Ara - một người phụ nữ
+                                chưa bao giờ cho phép bản thân sống thật với cảm xúc của chính mình. Ara đã yêu
+                                ChangSoo
+                                mà không hề biết lý do. Mọi thứ hoàn hảo cho đến khi James, người yêu cũ của Ara
+                                xuất
+                                hiện và tiết lộ bí mật của ChangSoo.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date"><span>12/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="71f365a1-e0d4-4482-9656-fb7ca547ad47" data-room-name="01">09:15</li>
+                                <li data-id="8cf6a2c1-bfa0-40d3-99d7-706d13f32a1f" data-room-name="01">15:45</li>
+                                <li data-id="0f9147e1-8c55-4e0b-b7d2-0318be4abad6" data-room-name="01">19:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="da9a4ca8-f78e-47c1-8a32-6b782814e597"
+                 cine-name="NHIỆM VỤ BẤT KHẢ THI NGHIỆP BÁO PHẦN MỘT (T16)">
+                <div class="film-item cl-ppl t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/07-2023/nhiem-vu-bat-kha-thi-poster.jpg"
+                                 alt="NHIỆM VỤ BẤT KHẢ THI NGHIỆP BÁO PHẦN MỘT (T16)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>NHIỆM VỤ BẤT KHẢ THI NGHIỆP BÁO PHẦN MỘT (T16)</h3>
+                            <p>Phần phim thứ 7 của loạt phim Nhiệm Vụ Bất Khả Thi</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="08/07/2023"><span>13/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="71f365a1-e0d4-4482-9656-fb7ca547ad47" data-room-name="01">09:15</li>
+                                <li data-id="7f972c48-b62b-4c50-95e9-2b6e0438bbc0" data-room-name="01">12:30</li>
+                                <li data-id="8cf6a2c1-bfa0-40d3-99d7-706d13f32a1f" data-room-name="01">15:45</li>
+                                <li data-id="0f9147e1-8c55-4e0b-b7d2-0318be4abad6" data-room-name="01">19:00</li>
+                                <li data-id="31c4c999-fa1f-4b19-9d5b-4b52e0777323" data-room-name="01">22:15</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="77c7647b-277c-435f-9513-296a6aea8d56"
+                 cine-name="MA SƠ TRỤC QUỶ (T18)">
+                <div class="film-item cl-pnk t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/ma-so-truc-quy.jpg"
+                                 alt="MA SƠ TRỤC QUỶ (T18)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>MA SƠ TRỤC QUỶ (T18)</h3>
+                            <p>Ofelia - một nữ tu trẻ vừa đặt chân đến thị trấn San Ramon đã bị ép phải thực hiện
+                                buổi
+                                lễ trừ tà cho một phụ nữ đang mang thai. Tưởng chừng buổi trục quỷ đã hoàn tất,
+                                Ofelia
+                                bàng hoàng nhận ra hiện thân quỷ dữ chưa từng biến mất.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>15/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">15:15</li>
+                                <li class="disable-time">17:20</li>
+                                <li data-id="1d397481-853a-4d33-8c5b-d095c94b4cfc" data-room-name="01">23:45</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>16/7<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="9049447a-eb75-4196-a7e4-c341521e82cc" data-room-name="01">10:50</li>
+                                <li data-id="2b50c766-3416-40da-a027-f456ff49173e" data-room-name="01">14:15</li>
+                                <li data-id="3e4c6d99-6fcf-49e4-8026-73fc1275a827" data-room-name="01">21:15</li>
+                                <li data-id="0c9599a8-61c4-4547-81ed-d978b9c63fc9" data-room-name="01">23:20</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="b5f2c313-95ae-400a-b6d1-86cedfe950e8"
+                 cine-name="CÔ THÀNH TRONG GƯƠNG (T13)">
+                <div class="film-item cl-org t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/07-2023/co-thanh-trong-guong.jpg"
+                                 alt="CÔ THÀNH TRONG GƯƠNG (T13)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>CÔ THÀNH TRONG GƯƠNG (T13)</h3>
+                            <p>Bỗng dưng một ngày nọ, Kokoro - cô bé lớp bảy ngày qua ngày giam mình trong phòng
+                                riêng
+                                thay vì tới trường sau tổn thương tâm lý - phát hiện tấm gương trong phòng mình phát
+                                sáng, bước qua tấm gương, Kokoro nhận ra mình đang ở trong một toà lâu đài cùng sáu
+                                người bạn chung hoàn cảnh. Bảy đứa trẻ cô độc buộc phải dấn bước vào một cuộc phiêu
+                                lưu
+                                kỳ lạ, trước khi đáp án cuối cùng mở ra, gây sững sờ và xúc động tột cùng.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>15/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">08:50</li>
+                                <li class="disable-time">12:40</li>
+                                <li class="disable-time">16:45</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="850a8da6-e561-4c37-bf15-7db537805013" data-room-name="05">08:35</li>
+                                <li data-id="52208eeb-1194-4b64-9147-32d889168691" data-room-name="02">15:05</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="b6a8ccd9-a88a-402e-89d9-b8cd55018517"
+                 cine-name="INDIANA JONES &amp; VÒNG QUAY ĐỊNH MỆNH (T16)">
+                <div class="film-item cl-ppl-dark t-2d">
+                    <a href="">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/indiana-jones.jpg"
+                                 alt="INDIANA JONES &amp; VÒNG QUAY ĐỊNH MỆNH (T16)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>INDIANA JONES &amp; VÒNG QUAY ĐỊNH MỆNH (T16)</h3>
+                            <p>Indiana Jones 5 sẽ pha trộn giữa thực tế, hư cấu khi lấy bối cảnh năm 1969, lần này
+                                Indiana Jones sẽ đối mặt với Đức quốc xã trong thời gian diễn ra cuộc chạy đua vào
+                                không
+                                gian.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>15/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">08:00</li>
+                                <li class="disable-time">10:20</li>
+                                <li class="disable-time">13:15</li>
+                                <li class="disable-time">15:00</li>
+                                <li class="disable-time">19:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="96175e15-868f-47ea-af60-a762639daf26" data-room-name="02">10:15</li>
+                                <li data-id="dc6bec7b-4654-49a9-be9e-1fc400f80a7a" data-room-name="06">14:45</li>
+                                <li data-id="caefe139-a523-42b1-b76b-106b9b413d0a" data-room-name="02">17:30</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="e06bd14a-94f8-4f06-9e73-c779e5ce9ddf" cine-name="LIVESTREAM (T16)">
+                <div class="film-item cl-ppl t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/livestream.jpg"
+                                 alt="LIVESTREAM (T16)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>LIVESTREAM (T16)</h3>
+                            <p>Đang trong giai đoạn chiến tranh lạnh với bạn gái, Dong Joo nhận được một đường link
+                                đến
+                                buổi phát sóng trực tiếp. Kinh khủng hơn khi cô gái sẽ bị lột trần làm thú vui trên
+                                mạng
+                                chính là bạn gái anh.
+                                T16 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 16 TUỔI TRỞ LÊN (16+)</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">11:15</li>
+                                <li class="disable-time">15:35</li>
+                                <li class="disable-time">18:15</li>
+                                <li data-id="98731f4a-e509-4c62-bcc0-101f0ead4094" data-room-name="03">22:05</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>17/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="cab25569-8a21-4967-bb8d-151b0881ca4a" data-room-name="06">12:45</li>
+                                <li data-id="a3ab75dc-83f5-45c9-a05d-e4c169596a80" data-room-name="06">17:45</li>
+                                <li data-id="5d6cb33e-94b8-4073-a7a3-08ecd51c5437" data-room-name="06">22:05</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="f2cf001d-f39d-418d-8974-1bc0453fc178"
+                 cine-name="RUBY THỦY QUÁI TUỔI TEEN 2D LT">
+                <div class="film-item cl-pnk t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/ruby.jpg"
+                                 alt="RUBY THỦY QUÁI TUỔI TEEN 2D LT">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>RUBY THỦY QUÁI TUỔI TEEN 2D LT</h3>
+                            <p>Ruby Thủy Quái Tuổi Teen là một bộ phim hài hành động, xoay quanh cô bé Ruby Gillman
+                                16
+                                tuổi, ngọt ngào và vụng về. Cô bé luôn muốn hòa nhập với bạn bè tại trường học
+                                Oceanside, nhưng lại quá nhút nhát để có thể chủ động gặp gỡ và làm quen kết bạn với
+                                nhiều người. Thậm chí, cô bé còn bị ngăn cản đi chơi với những đứa trẻ ở bãi biển vì
+                                người mẹ bảo vệ quá mức cấm Ruby xuống nước. Nhưng ở độ tuổi này, càng cấm cô bé
+                                càng
+                                muốn làm. Trong một lần cô bé phá vỡ quy tắc, thử nhảy xuống biển, Ruby đã phát hiện
+                                ra
+                                những thay đổi kỳ lạ của bản thân. Không chỉ thở được bình thường dưới nước, tứ chi
+                                cũng
+                                biến thành những xúc tu khổng lồ và còn phát sáng. Ruby còn gặp được người bà – một
+                                chỉ
+                                huy đại tài ở dưới đại dương sâu thẳm. Bà chính là người tiết lộ cho Ruby về thân
+                                thế
+                                hậu duệ của hoàng tộc giới Kraken – những chiến binh bảo vệ đại dương, và còn giới
+                                thiệu
+                                cô bé chính là công chúa trước rất nhiều thần dân Kraken.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">08:30</li>
+                                <li class="disable-time">11:50</li>
+                                <li class="disable-time">13:45</li>
+                                <li class="disable-time">18:45</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>18/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="89a40061-08c0-4db0-88fb-1461c66142fc" data-room-name="01">08:10</li>
+                                <li data-id="9b34a5fd-748f-44b0-9ccb-6fb10990cf93" data-room-name="02">13:15</li>
+                                <li data-id="7fde10f6-f36a-4170-9d89-b688ff490957" data-room-name="03">15:20</li>
+                                <li data-id="729b5506-ca3e-4453-9497-573019f63f37" data-room-name="04">18:20</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="de761589-6b50-4322-9f41-51959ac5e955" cine-name="QUÝ CÔNG TỬ">
+                <div class="film-item cl-org t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/quy-cong-tu-poster.jpg"
+                                 alt="QUÝ CÔNG TỬ">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>QUÝ CÔNG TỬ</h3>
+                            <p>Quý Công Tử xoay quanh người đàn ông bí ẩn được biết đến với tên gọi “Quý Công Tử”.
+                                Gã
+                                đột nhiên xuất hiện trước mắt Marco, một thanh niên người Philippines mơ ước trở
+                                thành
+                                vận động viên boxing chuyên nghiệp, lang thang khắp các sàn đấu bất hợp pháp tại
+                                đây.
+                                Nhằm chi trả cho viện phí của mẹ, Marco đến Hàn Quốc để tìm người cha đã bỏ rơi hai
+                                mẹ
+                                con cậu từ lâu. Đụng độ Quý Công Tử cùng hàng loạt những con người bí hiểm trong thế
+                                giới ngầm, Marco trở thành mục tiêu duy nhất của những thế lực mang nhiều mục đích
+                                khác
+                                nhau. Cuộc truy đuổi điên cuồng bắt đầu.</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>18/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">08:20</li>
+                                <li class="disable-time">10:20</li>
+                                <li class="disable-time">12:50</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>19/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="f2c63caf-de7c-4387-aa1e-1174dc2d9d93" data-room-name="04">09:40</li>
+                                <li data-id="7e27e654-4a2f-448c-b5ed-537a8072f8db" data-room-name="03">13:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="2e917782-9302-4202-af06-dd88c759c2ac" cine-name="VÚ EM DẠY YÊu">
+                <div class="film-item cl-ppl-dark t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/vu-em-day-yeu.jpg"
+                                 alt="VÚ EM DẠY YÊU ">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>VÚ EM DẠY "YÊU" (T18)</h3>
+                            <p>Không dành cho bé dưới 18!.. Red Band Trailer với Jennifer Lawrence trở lại, nóng
+                                bỏng cả
+                                mắt trong tựa phim hài-bựa-lầy nhất hè năm nay #NoHardFeelings - VÚ EM DẠY "YÊU. Duy
+                                nhất tại rạp. Dự kiến khởi chiếu 23.06.2023</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>10/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">16:45</li>
+                                <li data-id="3907f0d1-424e-4eb5-905f-fc1fc2954515" data-room-name="02">20:15</li>
+                                <li data-id="807d6d0c-e1ce-4ec9-8014-d46ad67938e4" data-room-name="06">23:00</li>
+                                <li data-id="749f3765-85b6-46e7-b952-982c63a3256a" data-room-name="03">23:59</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>11/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="dfd6cd05-39bf-498c-bb0c-3a7529c0ccfb" data-room-name="04">12:00</li>
+                                <li data-id="9c38c0cb-97b2-46c8-b85d-8a0b4ef7b695" data-room-name="03">17:15</li>
+                                <li data-id="a791e0a2-4284-4aa7-9182-088057c70a6c" data-room-name="02">20:30</li>
+                                <li data-id="42364aaa-c543-4ebb-ac81-0aef80857e37" data-room-name="06">23:59</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="5f70a61c-6839-4a3e-8e93-6e4abec28e6a"
+                 cine-name="ELEMENTAL 2D PĐ (K): XỨ SỞ CÁC NGUYÊN TỐ">
+                <div class="film-item cl-ppl t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/xu-so-cac-nguyen-to.jpg"
+                                 alt="ELEMENTAL 2D PĐ (K): XỨ SỞ CÁC NGUYÊN TỐ">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>ELEMENTAL 2D PĐ (K): XỨ SỞ CÁC NGUYÊN TỐ</h3>
+                            <p>Xứ Sở Các Nguyên Tố từ Disney và Pixar lấy bối cảnh tại thành phố các nguyên tố, nơi
+                                lửa,
+                                nước, đất và không khí cùng chung sống với nhau. Câu chuyện xoay quanh nhân vật
+                                Ember,
+                                một cô nàng cá tính, thông minh, mạnh mẽ và đầy sức hút. Tuy nhiên, mối quan hệ của
+                                cô
+                                với Wade - một anh chàng hài hước, luôn thuận thế đẩy dòng - khiến Ember cảm thấy
+                                ngờ
+                                vực với thế giới này.
+
+                                K - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM DƯỚI 13 TUỔI VÀ CÓ NGƯỜI BẢO HỘ ĐI KÈM</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date=""><span>12/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">10:40</li>
+                                <li class="disable-time">16:20</li>
+                                <li data-id="6185cc1b-e6e2-4f8a-83da-97bf046e4afe" data-room-name="01">21:35</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date=""><span>12/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="f9bef9a9-04a8-43b4-9767-94e3c79e286e" data-room-name="01">16:45</li>
+                                <li data-id="29aa3605-7dcf-48ed-bdc4-498cb7e9e8fa" data-room-name="03">21:30</li>
+                                <li data-id="a4c55f1b-044f-497b-b744-e3856b90a646" data-room-name="04">22:30</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="0dab56ea-71c2-403c-acad-88b90fd97dbe"
+                 cine-name="XỨ SỞ CÁC NGUYÊN TỐ 2D LT (K)">
+                <div class="film-item cl-pnk t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/xu-so-cac-nguyen-to.jpg"
+                                 alt="XỨ SỞ CÁC NGUYÊN TỐ 2D LT (K)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>XỨ SỞ CÁC NGUYÊN TỐ 2D LT (K)</h3>
+                            <p>Xứ Sở Các Nguyên Tố từ Disney và Pixar lấy bối cảnh tại thành phố các nguyên tố, nơi
+                                lửa,
+                                nước, đất và không khí cùng chung sống với nhau. Câu chuyện xoay quanh nhân vật
+                                Ember,
+                                một cô nàng cá tính, thông minh, mạnh mẽ và đầy sức hút. Tuy nhiên, mối quan hệ của
+                                cô
+                                với Wade - một anh chàng hài hước, luôn thuận thế đẩy dòng - khiến Ember cảm thấy
+                                ngờ
+                                vực với thế giới này.
+
+                                K - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM DƯỚI 13 TUỔI VÀ CÓ NGƯỜI BẢO HỘ ĐI KÈM</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">09:35</li>
+                                <li class="disable-time">17:30</li>
+                                <li data-id="11a1aaf2-71a5-4052-9101-f74347c40c46" data-room-name="06">20:45</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>17/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="d2b09a71-ae76-4ed7-925d-96eb3f099514" data-room-name="06">08:20</li>
+                                <li data-id="f0ddc126-66a8-483a-85c2-24a314e61b49" data-room-name="01">14:30</li>
+                                <li data-id="a985aaef-6fe1-42ef-918a-8b10beb54e70" data-room-name="01">19:00</li>
+                                <li data-id="57ac402d-68ed-446a-af02-c1e19f83c084" data-room-name="04">20:15</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="bb9cb633-973e-45ed-b9b7-9efe428c948b" cine-name="THE FLASH (T16)">
+                <div class="film-item cl-org t-2d">
+                    <a href="#">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/the-flash-poster.jpg"
+                                 alt="THE FLASH (T16)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>THE FLASH (T16)</h3>
+                            <p>Đa thế giới va chạm trong “The Flash” khi Barry Allen sử dụng siêu năng lực của mình
+                                để
+                                du hành ngược thời gian nhằm thay đổi những sự kiện trong quá khứ. Nhưng trong khi
+                                nỗ
+                                lực cứu gia đình của mình, Barry vô tình làm thay đổi tương lai, khiến cho anh bị
+                                mắc
+                                kẹt trong một thực tại đáng sợ. Thực tại này hồi sinh Tướng quân Zod, đe dọa hủy
+                                diệt
+                                mọi thứ và không có một Siêu anh hùng nào đứng ra bảo vệ. Vì vây, Barry phải thuyết
+                                phục
+                                một Người Dơi rất khác đã nghỉ hưu và giải cứu một người Kryptonian đang bị giam
+                                cầm…
+                                cho dù đây không phải là người anh ấy đang tìm kiếm. Cuối cùng, để cứu thế giới mà
+                                anh
+                                ấy đang ở và trở về tương lai mà anh ấy biết, hy vọng duy nhất của Barry là chạy đua
+                                để
+                                giành lấy mạng sống của mình. Nhưng liệu sự hy sinh này có đủ để thiết lập lại vũ
+                                trụ?</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>16/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">09:15</li>
+                                <li class="disable-time">13:45</li>
+                                <li class="disable-time">21:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-item" cine-id="62c9905f-3b5c-4e60-a304-c8f31d5c8334" cine-name="TÀ CHÚ CẤM (T18)">
+                <div class="film-item cl-ppl-dark t-2d">
+                    <a href="">
+                        <div class="film-item-pic">
+                            <img src="https://cinestar.com.vn/pictures/Cinestar/06-2023/ta-chu-cam-poster.jpg"
+                                 alt="TÀ CHÚ CẤM (T18)">
+                        </div>
+                        <div class="film-item-txt">
+                            <h3>TÀ CHÚ CẤM (T18)</h3>
+                            <p>Phim kể về cặp vợ chồng Ning, Kwin và cô con gái 7 tuổi với tên gọi Ing. Vì khó khăn
+                                về
+                                tài chính, hai vợ chồng quyết định cho thuê ngôi nhà đang ở và chuyển đến một căn hộ
+                                chung cư giá rẻ để sinh sống.
+                                Sau khi những người thuê nhà chuyển đến, Ning nhận thấy chồng bắt đầu có những hành
+                                vi
+                                bất thường. Anh ta trở nên bí mật và thường biến mất khỏi căn hộ và lúc 4 giờ sáng.
+                                Kwin
+                                thậm chí còn có một hình xăm kỳ lạ ở ngực tựa như ký hiệu đặc biệt của một hội tà
+                                giáo
+                                bí ẩn. Khi hành vi của chồng ngày càng trở nên đáng lo ngại, cũng là lúc Ning nhận
+                                ra cô
+                                con gái của mình đang gặp hiểm nguy. Bí mật nào đang được che giấu trong ngôi nhà
+                                cho
+                                thuê của họ?
+
+                                T18 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 18 TUỔI TRỞ LÊN (18+)</p>
+                        </div>
+                    </a>
+                    <div class="film-item-type">
+                        <span class="icon-2d"></span>
+                        <!--<span class="icon-am3d"></span><span class="icon-3d"></span>-->
+                    </div>
+                </div>
+                <div class="schedule">
+                    <div class="row">
+                        <div class="row-date" data-date="06/07/2023"><span>10/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li class="disable-time">11:00</li>
+                                <li class="disable-time">16:00</li>
+                                <li class="disable-time">18:30</li>
+                                <li data-id="4b737775-32eb-4742-bafe-bf3ff92725f8" data-room-name="05">21:00</li>
+                                <li data-id="3f3e2ece-0fda-4bd6-ae3e-0846608b11ac" data-room-name="05">23:30</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row-date" data-date="07/07/2023"><span>011/07<br>2023</span></div>
+                        <div class="row-hour">
+                            <ul>
+                                <li data-id="a74a6d03-71e1-4404-8767-a721d07c730d" data-room-name="05">11:00</li>
+                                <li data-id="8e22b88f-70e0-407c-99a3-e1f563187955" data-room-name="05">16:00</li>
+                                <li data-id="4ff7dcea-d08f-4c86-bc46-337c2aea8d94" data-room-name="05">18:30</li>
+                                <li data-id="dfee42f7-0af6-46e7-93b7-ecb7a3953185" data-room-name="05">21:00</li>
+                                <li data-id="c6317157-87ff-4f8c-9891-05619c517d3c" data-room-name="03">23:45</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="/layout::footer"></footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</html>

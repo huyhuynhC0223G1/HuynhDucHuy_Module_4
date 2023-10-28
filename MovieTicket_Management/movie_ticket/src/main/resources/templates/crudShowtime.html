@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/4bf93b0ca4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+    <title>CRUD SHOWTIME</title>
+
+</head>
+<body>
+
+<section class="my-2">
+
+    <div class="my-3 px-5 row justify-content-between">
+        <div class="col-6">
+            <a class="btn btn-success" onclick="showAll()">SHOW ALL BLOGS</a>
+            <a class="btn btn-success" id="loadMore" onclick="loadMoreBlogs()">LOAD MORE</a>
+            <a role="button" class="btn btn-outline-info"
+               data-bs-toggle="modal" data-bs-target="#addModal">
+                Add New Blog</a>
+
+        </div>
+        <div class="col-6">
+            <!--                search-->
+            <input class="form-control w-50 d-inline" type="text" name="title"
+                   placeholder="Enter blog's title here to search:" id="search-input">
+            <button type="button" onclick="search()" class="btn btn-success submit-search">Search</button>
+
+        </div>
+    </div>
+
+
+    <div class="row row-cols-md-3 row-cols-2 justify-content-start gy-2 gx-3 my-2" id="result"></div>
+
+</section>
+
+<!-- Modal update blog-->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel1">Update Blog
+                </h1>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-6">
+                    <!--            update-->
+                    <input class="form-control d-inline" type="text"
+                           placeholder="Enter blog's title here to add new:" id="updateTitle">
+                    <input class="form-control  d-inline" type="text"
+                           placeholder="Enter blog's image here to add new:" id="updateImage">
+                    <input class="form-control d-inline" type="text"
+                           placeholder="Enter blog's content here to add new:" id="updateContent">
+                    <select id="updateCategory"></select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="hidden" id="updateId" value="">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" onclick="update()" class="btn btn-success submit-search">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal add blog-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel2">Create New Blog
+                </h1>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-6">
+                    <!--            update-->
+                    <input class="form-control d-inline" type="text"
+                           placeholder="Enter blog's title here to add new:" id="addTitle">
+                    <input class="form-control d-inline" type="text"
+                           placeholder="Enter blog's image here to add new:" id="addImage">
+                    <input class="form-control d-inline" type="text"
+                           placeholder="Enter blog's content here to add new:" id="addContent">
+                    <select id="addCategory"></select>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="hidden" id="addId" value="">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" onclick="add()" class="btn btn-success submit-search">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal delete blog-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5">Are you sure to delete this blog
+                    <span class="deleteId text-danger"></span> ?</h2>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" class="deleteId" value="">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" onclick="cfDelete()" class="btn btn-success submit-search">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!--created by CongNam 5/7-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+</head>
+<body>
+<nav th:fragment="navbar" class="header navbar navbar-expand-lg sticky-top">
+    <div class="col-1"></div>
+    <div class="col-2">
+        <a class="navbar-brand" href="#">
+            <div class="logo-mb"></div>
+        </a>
+    </div>
+    <div>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="nav-item col-1">
+                    <a class="nav-link active link-home" aria-current="page" href="#"></a>
+                </div>
+                <div class="nav">
+                    <ul class="navbar-nav tittle">
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Phim</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Lịch chiếu</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Rạp và giá</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Khuyến Mãi</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>hỏi và đáp</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Tin tức</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>giới thiệu</h1></a>
+                        </li>
+                        <li class="nav-item">
+                            <a style=" color:white" class="nav-link" href="#"><h1>Liên hệ</h1></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1">
+        <div>
+            <a class="nav-link" href="?lang=en" style="padding: 5px 5px 0px 10px; float: left">
+                <img src="/images/EN.jpg" height="30" width="50"/>
+            </a>
+            <a class="nav-link" href="?lang=vi" style="padding: 5px 0px 0px 5px; float: left">
+                <img src="/images/VN.jpg" height="30" width="50"/></a>
+        </div>
+    </div>
+    </div>
+</nav>
+<!--HEADER-->
+
+<!--FOOTER-->
+<footer th:fragment="footer">
+    <div class="bottom">
+        <div class="bottom-nav">
+            <div class="logo-footer"></div>
+        </div>
+        <div class="bottom-wrap">
+            <div class="social">
+                <h2>Liên kết</h2>
+                <ul>
+                    <li><a href="#" target="_blank" class="facebook">Facebook</a></li>
+                    <li><a href="#" target="_blank" class="youtube">Youtube</a></li>
+                </ul>
+                <h2>Hotline</h2>
+                <a class="hotline-tel" href="">0988.88.5678</a>
+            </div>
+
+            <div class="cinestart-price">
+                <h2>Hệ thống rạp</h2>
+                <ul>
+                    <li data-name="8f3a5832-8340-4a43-89bc-6653817162f1"><a href="#">CodeGym-Đà Nẵng</a></li>
+                    <li data-name="8f3a5832-8340-4a43-89bc-6653817162f1"><a href="#">CodeGym-Hà Nội</a></li>
+                    <li data-name="8f3a5832-8340-4a43-89bc-6653817162f1"><a href="#">CodeGym-Huế</a></li>
+
+                </ul>
+            </div>
+            <div class="cinestart">
+
+                <h2>CINESTAR</h2>
+                <ul>
+                    <li data-name="212_2"><a href="">Phim đang chiếu</a></li>
+                    <li data-name="212_1"><a href="">Phim sắp chiếu</a></li>
+                    <li data-name="212_3"><a href="">Suất chiếu đặc biệt</a></li>
+                    <li data-name="213"><a href="">Lịch chiếu</a></li>
+                    <li data-name="211"><a href="">Khuyến mãi</a></li>
+                </ul>
+            </div>
+
+            <div class="info">
+                <h2>Thông tin</h2>
+                <ul>
+                    <li data-name="207"><a href="">Giới thiệu</a></li>
+                    <li data-name="209"><a href="">Tin tức</a></li>
+                    <li data-name="210"><a href="">Hỏi và đáp</a></li>
+                    <li data-name="118"><a href="">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="info terms_and_condition">
+                <h2>CHÍNH SÁCH VÀ QUY ĐỊNH</h2>
+                <ul>
+                    <li><a href="" data-name="terms_and_condition_2">Quy định chung</a></li>
+                    <li><a href="" data-name="terms_and_condition_3">Điều khoản giao dịch</a></li>
+                    <li><a href="" data-name="terms_and_condition_4">Chính sách bảo mật</a></li>
+                    <li><a href="" data-name="terms_and_condition_5">Thông tin công ty</a></li>
+                </ul>
+            </div>
+            <div class="bottom-nav-icon">
+                <ul>
+                    <li>
+                        <a href="" data-name="1">
+                            <img th:src="@{images/dolby2.png}" alt="My Image">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" data-name="2">
+                            <img th:src="@{images/crhistie.png}" alt="My Image">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" data-name="3">
+                            <img th:src="@{images/2d.jpg}" alt="My Image">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" data-name="4">
+                            <img th:src="@{images/3d.jpg}" alt="My Image">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" data-name="5">
+                            <img th:src="@{images/cinestar-coffee-02.png}" alt="My Image">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="payment">
+            <h2>Chấp nhận thanh toán</h2>
+            <ul>
+                <li><a href=""><img src="https://cinestar.com.vn/pictures/cache/webimages/9Rest/1Logo/napas-40.png"
+                                    alt="Thẻ thanh toán nội địa"></a></li>
+                <li><a href=""><img src="https://cinestar.com.vn/pictures/moi/ThanhToan/payment-visa.png"
+                                    alt="Visa"></a>
+                </li>
+                <li><a href=""><img src="https://cinestar.com.vn/pictures/moi/ThanhToan/payment-mastercard.png"
+                                    alt="mastercard"></a></li>
+                <li><a href=""><img src="https://cinestar.com.vn/pictures/webimages/momo.jpg" alt="Ví MoMo"></a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p><a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=51406" target="_blank"><img
+                    width="150px" src="https://cinestar.com.vn/catalog/view/theme/default/images/dathongbao.png"
+                    alt=" đã được duyệt"></a></p>
+            <p>CÔNG TY CỔ PHẦN GIẢI TRÍ PHÁT HÀNH PHIM – RẠP CHIẾU PHIM NGÔI SAO<br>
+                Địa chỉ: 280 Trần Hưng Đạo, An Hải Tây , TP Đà Nẵng<br>
+                Giấy CNĐKDN số: 0312742744, đăng ký lần đầu ngày 18/04/2014, đăng ký thay đổi lần thứ 2 ngày 15/09/2014,
+                cấp
+                bởi Sở KH&amp;ĐT TP.Đà Nẵng<br><br>
+                2015 © <strong>CINESTAR</strong>. Đã đăng ký Bản quyền.</p>
+        </div>
+    </div>
+</footer>
+<div th:fragment="toast" id="toasts">
+    <div class="toast">
+        <i class="fa-solid fa-check"></i>
+        <span class="message" th:if="${#message!=null}" th:text="${#message}"></span>
+        <span class="countdown"></span>
+    </div>
+</div>
+</body>
+</html>

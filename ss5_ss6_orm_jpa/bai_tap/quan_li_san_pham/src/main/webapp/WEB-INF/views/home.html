@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form class="d-flex" role="search" method="get" action="/product/search">
+    <input name="search" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+<p id="success" th:if="${notsearch != null}" th:text="${notsearch}" style="color: red"></p>
+<h2>Product list</h2>
+<a th:href="@{/product/create}">
+    <button type="submit"> Add New Product</button>
+</a>
+<p id="success" th:if="${message != null}" th:text="${message}" style="color: green"></p>
+<p id="success" th:if="${error != null}" th:text="${error}" style="color: red"></p>
+<table id="products" border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>DESCRIBE</th>
+        <th>PRODUCER</th>
+        <th>PRICE</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+        <th>DETAIL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, productlistStat : ${productlist} ">
+        <td th:text="${product.getId()}"></td>
+        <td th:text="${product.getName()}"></td>
+        <td th:text="${product.getDescribe()}"></td>
+        <td th:text="${product.getProducer()}"></td>
+        <td th:text="${product.getPrice()}"></td>
+        <td><a th:href="@{/product/edit/{id}(id=${product.getId()})}">
+            <button type="submit">EDIT</button>
+        </a></td>
+        <td><a th:href="@{/product/delete/{id}(id=${product.getId()})}">
+            <button type="submit">DELETE</button>
+        </a></td>
+        <td><a th:href="@{/product/detail/{id}(id=${product.getId()})}">
+            <button type="submit">DETAIL</button>
+        </a></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    setTimeout(function () {
+        document.getElementById("success").style.display = "none";
+    }, 2000)
+</script>
+</body>
+</html>

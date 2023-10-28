@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>BOOK MANAGEMENT</h2>
+<p id="success" style="color: green" th:if="${message != null}" th:text="${message}"></p>
+<p id="success" th:if="${error != null}" th:text="${error}" style="color: red"></p>
+<form method="post" action="/book/giveBack">
+    <input id="code" name="code">
+    <button type="submit">REPAY</button>
+</form>
+<a th:href="@{/borrow}">
+    <button type="submit">BORROW LIST</button>
+</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>NAME</th>
+        <th>QUANTITY</th>
+        <th>DETAIL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, item: ${books}">
+        <td th:text="${item.count}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.quantity}"></td>
+        <td>
+            <a th:href="@{/borrow/borrow/{id}(id=${book.id})}">
+                <button type="submit">DETAIL</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    setTimeout(function () {
+        document.getElementById("success").style.display = "none";
+    }, 2000)
+</script>
+</body>
+</html>

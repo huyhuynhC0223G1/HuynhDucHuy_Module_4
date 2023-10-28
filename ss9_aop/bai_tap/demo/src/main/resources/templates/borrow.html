@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Borrow Code</th>
+            <th>Name</th>
+            <th>Borrow Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="borrow, item:${borrows}">
+            <td th:text="${item.count}" readonly></td>
+            <td name="code" th:text="${borrow.code}" readonly></td>
+            <td th:text="${borrow.book.name}" readonly></td>
+            <td th:text="${borrow.borrowDate}" readonly></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
